@@ -1,14 +1,15 @@
 {
   "name": "alx-backend-javascript",
   "version": "1.0.0",
-  "description": "Welcome to the **ALX Backend JavaScript** repository! This repository is dedicated to providing projects, exercises, and resources to help you master backend development using JavaScript.",
+  "description": "Welcome to the ALX Backend JavaScript repository! This repository is dedicated to providing projects, exercises, and resources to help you master backend development using JavaScript.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "webpack serve --mode development"
+    "dev": "node"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["backend", "JavaScript", "Node.js", "ALX", "development", "education"],
+  "author": "Majidi Mohammed <majidimajidi2003@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.24.6",
@@ -19,9 +20,6 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.2",
     "globals": "^15.3.0",
-    "jest": "^29.7.0",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "jest": "^29.7.0"
   }
 }
