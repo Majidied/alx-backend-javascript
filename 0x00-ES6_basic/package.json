@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "dev": "node",
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "keywords": [
     "backend",
