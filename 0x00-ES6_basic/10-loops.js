@@ -3,6 +3,5 @@ export default function appendToEachArrayValue(array, appendString) {
     let index = array.indexOf(value);
     array[index] = appendString + value;
   }
-
   return array;
 }
