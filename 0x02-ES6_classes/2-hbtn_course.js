@@ -9,8 +9,8 @@ class HolbertonCourse {
    * @param {String} name
    */
   set name(name) {
-    if (typeof name !== "string") {
-      throw new TypeError("Name must be a string");
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a string');
     }
     this._name = name;
   }
@@ -23,8 +23,8 @@ class HolbertonCourse {
    * @param {Number} length
    */
   set length(length) {
-    if (typeof length !== "number") {
-      throw new TypeError("Length must be a number");
+    if (typeof length !== 'number') {
+      throw new TypeError('Length must be a number');
     }
     this._length = length;
   }
@@ -40,7 +40,7 @@ class HolbertonCourse {
     if (students instanceof Array) {
       this._students = students;
     } else {
-      throw new TypeError("Students must be an Array");
+      throw new TypeError('Students must be an Array');
     }
   }
 
