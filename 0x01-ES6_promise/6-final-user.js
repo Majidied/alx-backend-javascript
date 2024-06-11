@@ -1,18 +1,18 @@
-export default function handleProfileSignup(firstName, lastName, fileName) {
-  const signUp = signUpUser(firstName, lastName)
-    .then((user) => {
-      console.log(`${user.firstName} ${user.lastName}`);
-      return { firstName: user.firstName, lastName: user.lastName };
-    })
-    .catch(() => {
-      console.log("Signup system offline");
-      throw new Error("Signup system offline");
-    });
+import signUpUser from './4-user-promise';
+import uploadPhoto from './5-photo-reject';
 
-  const upload = new Promise((resolve, reject) => {
-    console.log(`Upload of ${fileName} complete`);
-    reject(new Error(`${fileName} cannot be processed`));
-  });
-
-  return Promise.allSettled([signUp, upload]);
+export default async function handleProfileSignup(
+  firstName,
+  lastName,
+  fileName
+) {
+  return Promise.allSettled([
+    signUpUser(firstName, lastName),
+    uploadPhoto(fileName),
+  ]).then((res) =>
+    res.map((o) => ({
+      status: o.status,
+      value: o.status === 'fulfilled' ? o.value : String(o.reason),
+    }))
+  );
 }
