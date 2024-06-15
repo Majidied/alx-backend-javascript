@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb-base",
+    "plugin:jest/all"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "jest"
+  ],
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "max-classes-per-file": "off",
+    "no-underscore-dangle": "off",
+    "no-console": "off",
+    "no-shadow": "off",
+    "no-restricted-syntax": [
+      "error",
+      "LabeledStatement",
+      "WithStatement"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "excludedFiles": "babel.config.js"
+    }
+  ]
+}
