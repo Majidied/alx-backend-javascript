@@ -28,12 +28,16 @@ class StudentsController {
           return 0;
         };
 
-        for (const [field, group] of Object.entries(studentGroups).sort(cmpFxn)) {
-          responseParts.push([
-            `Number of students in ${field}: ${group.length}.`,
-            'List:',
-            group.map((student) => student.firstname).join(', '),
-          ].join(' '));
+        for (const [field, group] of Object.entries(studentGroups).sort(
+          cmpFxn
+        )) {
+          responseParts.push(
+            [
+              `Number of students in ${field}: ${group.length}.`,
+              'List:',
+              group.map((student) => student.firstname).join(', '),
+            ].join(' ')
+          );
         }
         response.status(200).send(responseParts.join('\n'));
       })
@@ -58,7 +62,9 @@ class StudentsController {
 
         if (Object.keys(studentGroups).includes(major)) {
           const group = studentGroups[major];
-          responseText = `List: ${group.map((student) => student.firstname).join(', ')}`;
+          responseText = `List: ${group
+            .map((student) => student.firstname)
+            .join(', ')}`;
         }
         response.status(200).send(responseText);
       })
