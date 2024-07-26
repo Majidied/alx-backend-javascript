@@ -13,11 +13,11 @@ async function countStudents(path) {
       fields[student[3]].push(student[0]);
     });
     const total = `Number of students: ${data.length}`;
-    let response = `${total}\n`;
+    let response = `${total}`;
     for (const field in fields) {
       if (field) {
-        const list = `List: ${fields[field].join(', ')}`;
-        response += `${list}\n`;
+        const list = `\nNumber of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`;
+        response += `${list}`;
       }
     }
     return response;
