@@ -2,34 +2,43 @@
 const http = require('http');
 const fs = require('fs');
 
-const app = http.createServer((req, res) => {
+async function countStudents(path) {
+  try {
+    const csv = await fs.promises.readFile(path, { encoding: 'utf8' });
+    const fields = {};
+    const data = csv.trim().split('\n').slice(1);
+    data.forEach((line) => {
+      const student = line.split(',');
+      if (!fields[student[3]]) fields[student[3]] = [];
+      fields[student[3]].push(student[0]);
+    });
+    const total = `Number of students: ${data.length}`;
+    let response = `${total}\n`;
+    for (const field in fields) {
+      if (field) {
+        const list = `List: ${fields[field].join(', ')}`;
+        response += `${list}\n`;
+      }
+    }
+    return response;
+  } catch (error) {
+    throw new Error('Cannot load the database');
+  }
+}
+
+const app = http.createServer(async (req, res) => {
   if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    const data = fs.readFileSync(process.argv[2], 'utf8').split('\n').slice(1);
-    res.write('This is the list of our students\n');
-    res.write(
-      `Number of students in CS: ${
-        data.filter((line) => line.split(',')[3] === 'CS').length
-      }. List: ${data
-        .filter((line) => line.split(',')[3] === 'CS')
-        .map((line) => line.split(',')[0])
-        .join(', ')}\n`
-    );
-    res.write(
-      `Number of students in SWE: ${
-        data.filter((line) => line.split(',')[3] === 'SWE').length
-      }. List: ${data
-        .filter((line) => line.split(',')[3] === 'SWE')
-        .map((line) => line.split(',')[0])
-        .join(', ')}\n`
-    );
+    res.write('Hello Holberton School!');
     res.end();
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not Found');
+  } else if (req.url === '/students') {
+    res.write('This is the list of our students\n');
+    try {
+      const result = await countStudents(process.argv[2]);
+      res.write(result);
+    } catch (error) {
+      res.write(error.message);
+    }
+    res.end();
   }
 });
 
