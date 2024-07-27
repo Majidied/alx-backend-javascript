@@ -6,7 +6,12 @@ function countStudents(path) {
     const lines = data.trim().split('\n');
     const students = lines.slice(1).map((line) => {
       const [firstname, lastname, age, field] = line.split(',');
-      return {firstname, lastname, age, field};
+      return {
+        firstname,
+        lastname,
+        age,
+        field,
+      };
     });
 
     const fields = {};
