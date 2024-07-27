@@ -6,7 +6,7 @@ function countStudents(path) {
     const lines = data.trim().split('\n');
     const students = lines.slice(1).map((line) => {
       const [firstname, lastname, age, field] = line.split(',');
-      return { firstname, lastname, age, field };
+      return {firstname, lastname, age, field};
     });
 
     const fields = {};
@@ -22,7 +22,7 @@ function countStudents(path) {
       console.log(
         `Number of students in ${field}: ${
           firstnames.length
-        }. List: ${firstnames.join(', ')}`
+        }. List: ${firstnames.join(', ')}`,
       );
     }
   } catch (err) {
