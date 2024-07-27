@@ -8,7 +8,8 @@ import fs from 'fs';
  *   String: {firstname: String, lastname: String, age: number}[]
  * }>}
  */
-const readDatabase = (dataPath) => new Promise((resolve, reject) => {
+const readDatabase = (dataPath) =>
+  new Promise((resolve, reject) => {
     if (!dataPath) {
       reject(new Error('Cannot load the database'));
     }
@@ -25,7 +26,7 @@ const readDatabase = (dataPath) => new Promise((resolve, reject) => {
             0,
             dbFieldNames.length - 1,
           );
-
+    
           for (const line of fileLines.slice(1)) {
             const studentRecord = line.split(',');
             const studentPropValues = studentRecord.slice(
@@ -36,11 +37,12 @@ const readDatabase = (dataPath) => new Promise((resolve, reject) => {
             if (!Object.keys(studentGroups).includes(field)) {
               studentGroups[field] = [];
             }
-            const studentEntries = studentPropNames.map((propName, idx) => [
-              propName,
-              studentPropValues[idx],
-            ]);
-            studentGroups[field].push(Object.fromEntries(studentEntries));
+            studentGroups[field].push(
+              studentPropNames.reduce((acc, propName, idx) => {
+                acc[propName] = studentPropValues[idx];
+                return acc;
+              }, {}),
+            );
           }
           resolve(studentGroups);
         }
